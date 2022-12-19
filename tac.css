@@ -1,0 +1,119 @@
+#wrapper{
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
+}
+#top{
+    position: fixed;
+    left: 0;
+    right: 0;
+    background-color: bisque;
+    height: min-content;
+    z-index: 1;
+}
+#logo{
+    background-color: rgb(116, 138, 138);
+    width: max-content;
+}
+#cart-icon{
+    height: max-content;
+    border: solid;
+    border-color: black;
+    text-align: center;
+    background-color: black;
+    color: rgb(116, 138, 138);
+}
+#logo-and-cart{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+#search-container{
+    padding: 15px;
+}
+#departments{
+    
+    overflow: auto;
+    white-space: nowrap;
+    scroll-behavior: smooth;
+    justify-content: space-between;
+    
+    margin-top: 120px;
+}
+#departments li{
+    background-color: brown;
+    border-radius:50px ;
+    width: 100px;
+    height: 100px;
+    margin: 20px;
+    text-align: center;
+    padding-top: 20px;
+    display: inline-block;
+}
+#rc-card, #ec-card, #wc-card, #tc-card, #dc-card, #rc-card{
+    background-color: black;
+    width: 200px;
+    height: 250px;
+    border-radius: 10px;
+    margin-right: 20px;
+    display: inline-block;
+    color: white;
+    
+}
+#random-pick-cat, #wishlist-cat, #top-search-cat, #deals-cat, #recommandations-cat, #essentials-cat{
+    align-content: baseline;
+    overflow: auto;
+    white-space: nowrap;
+    
+}
+h3{
+    margin-top: 30px;
+}
+#nav-bar{
+    background-color: rgb(18, 23, 48);
+    color: rgb(32, 214, 214);
+    height: max-content;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 20px;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+}
+#nav-bar i{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border: solid;
+    border-top: none;
+    border-width: 1px;
+    border-color: rgb(148, 143, 143);
+
+}
+#rc-card:hover , #ec-card:hover, #wc-card:hover, #tc-card:hover, #dc-card:hover, #rc-card:hover {
+    width: 230px;
+    height: 280px;
+
+}
+#viewmore-btn{
+    background-color: rgb(18, 23, 48);
+    color: rgb(32, 214, 214);
+    border-radius: 50%;
+
+    height: 50px;
+    width: max-content;
+
+}
+#viewmore-btn:hover {
+    height: 60px;
+}
+#save-btn{
+    position: relative;
+    left:85%;
+}
+
