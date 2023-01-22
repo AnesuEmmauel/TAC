@@ -62,7 +62,7 @@
     display: inline-block;
 }
 #rc-card, #ec-card, #wc-card, #tc-card, #dc-card, #rc-card{
-    background-color: black;
+   
     width: 200px;
     height: 250px;
     border-radius: 10px;
