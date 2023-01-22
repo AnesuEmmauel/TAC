@@ -72,6 +72,7 @@
     cursor: pointer;
     position: relative;
     border-style: double;
+    border-color: black;
 }
 #random-pick-cat, #wishlist-cat, #top-search-cat, #deals-cat, #recommandations-cat, #essentials-cat{
     align-content: baseline;
