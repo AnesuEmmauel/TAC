@@ -1,3 +1,6 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
 #wrapper{
     margin: 0;
     padding: 0;
@@ -16,6 +19,8 @@
 #logo{
     background-color: rgb(116, 138, 138);
     width: max-content;
+    color: black;
+    font-family: 'Lobster', cursive;
 }
 #cart-icon{
     height: max-content;
@@ -136,4 +141,12 @@ img {
     border-radius: 10px;
     z-index: 0;
 }
-
+#logo-and-cart a{
+    text-decoration: none;
+    
+}
+@media (min-width: 600px){
+    #nav-bar{
+        justify-content: space-around;
+    }
+}
