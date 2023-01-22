@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="tac.css">
+    
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+</head>
+<body style="margin: 0px; padding: 0px; width: 100%;">
+    <div id="wrapper" class="container">
+        <div id="top">
+          <div id="logo-and-cart">
+            <a href="#"><h1 id="logo">TAC <i class="bi bi-bank"></i> </h1></a>
+            <i id="cart-icon" class="bi bi-basket2-fill fa-lg" style="font-size:36px;"></i>
+          </div>
+            
+          <div id="search-container">
+            <label>
+              <input id="txt-input" type="search" placeholder="search" onkeyup="search()">  
+            </label>
+          </div>
+        </div>
+
+        <div id="nav-bar">
+          <i class="bi bi-houses">home</i>
+          <i class="bi bi-boxes">categories</i>
+          <i class="bi bi-rocket-takeoff">deals</i>
+          <i class="bi bi-stack-overflow">wishlist</i>
+          
+        </div>
+        
+       
+        <div id="departments">
+          
+            <li>clothing</li>
+            <li>Electronics</li>
+            <li>Kitchen</li>
+            <li>Outdoor</li>
+            <li>Sports</li>
+            <li>Books</li>
+            <li>Toys</li>
+
+            <li>Gourmet</li>
+            <li>Jewelry</li>
+
+            <li>Acessories</li>
+            <li>Footwear</li>
+            <li>Personal Care</li>
+        </div>
+        <div id="results"></div>
+        <div id="product-container">
+          <div id="cats">
+            <h3>Wishlist <i class="bi bi-bookmark-heart"></i></h3>
+            <div id="wishlist-cat">
+              
+              <div id="wc-card">
+                <button id="save-btn" onclick="wishlist()"><i class="bi bi-bookmark-heart"></i></button>
+                <h6 id="name">t-shirt </h6>
+                <h6 id="price">$$$</h6>
+                <button id="rating"><i class="bi bi-stars"></i></button>
+                <img src="data:image/webp;base64,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" alt="image">
+              </div>
+              <div id="wc-card">
+                <button id="save-btn" onclick="wishlist()"><i class="bi bi-bookmark-heart"></i></button>
+                <h6 id="name">product name</h6>
+                <h6 id="price">$$$</h6>
+                <button id="rating"><i class="bi bi-stars"></i></button>
+                <img src="https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQchWpidYtK4wAwXdBDGQOwzXq-NBLKDsZWH4bNdFYNyBB0t3O6akUeBPAE5zYRPQVjXD20efqeh6NEGB27lvfK6HSaU2G_PukskYy_-co&usqp=CAE" alt="image">
+              </div>
+              <div id="wc-card">
+                <button id="save-btn" onclick="wishlist()"><i class="bi bi-bookmark-heart"></i></button>
+                <h6 id="name">product name</h6>
+                <h6 id="price">$$$</h6>
+                <button id="rating"><i class="bi bi-stars"></i></button>
+                <img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQOSZ4J-5HV9b5QIyoMpTSKNwoK4_CUBN5cAEEPtQAAxSfZWWWUwKaj2mGfcDf5Ser6q6Ce2VfsYGYzAScbo3zxwQCNWePLH17-jWgZJHOKHwRzB5Tdu-CXGw&usqp=CAE" alt="image">
+              </div>
+              <div id="wc-card">
+                <button id="save-btn" onclick="wishlist()"><i class="bi bi-bookmark-heart"></i></button>
+                <h6 id="name">product name</h6>
+                <h6 id="price">$$$</h6>
+                <button id="rating"><i class="bi bi-stars"></i></button>
+                <img src="https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcRQ81rnS788UYxw_aW_XJLxuKD1YK4OGcyB2XXoxMCF1IRrv1oRHVr_93turwwbxMeLsq0Kz7mztLTQsuLOaUrAnJw9X_Ei9QihBDMTN_Sz7r-poLc723Yy7w&usqp=CAE" alt="image">
+              </div>
+              <div id="wc-card">
+                <button id="save-btn" onclick="wishlist()"><i class="bi bi-bookmark-heart"></i></button>
+                <h6 id="name">product name</h6>
+                <h6 id="price">$$$</h6>
+                <button id="rating"><i class="bi bi-stars"></i></button>
+                <img src="https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcS2tJ9j4dYZu-ZqAHiP9JU3q9fralpxDwdDzYNQsdNaFP_I7eH_5MwO8yeVXmiuf5xPw6-bw8kvv3uaekW9TjiOPSaReXomEl2JoAF6JGS7&usqp=CAE" alt="image">
+              </div>
+              <div id="wc-card">
+                <button id="save-btn" onclick="wishlist()"><i class="bi bi-bookmark-heart"></i></button>
+                <h6 id="name">product name</h6>
+                <h6 id="price">$$$</h6>
+                <button id="rating"><i class="bi bi-stars"></i></button>
+                <img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSuaKYCTW6gyHOS_bpfq-tlwHlJVxC58AY6hw6dlBh3APUb2wDYiH9vVKsdXmEosE6w3npgz2MndQvkq4QfcIG2ns4N4L3hWLxU9l17HE2W&usqp=CAE" alt="image">
+              </div>
+              <div id="wc-card">
+                <button id="save-btn" onclick="wishlist()"><i class="bi bi-bookmark-heart"></i></button>
+                <h6 id="name">product name</h6>
+                <h6 id="price">$$$</h6>
+                <button id="rating"><i class="bi bi-stars"></i></button>
+                <img src="https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcRm5QXr29GtkKi0KlcXCnpnEczxhK8h7Ap-5FHfAB4SiaKSAtLHseTfqQP9ZmV2K1QiJ7-wYMhRyhVYOLcAOGIo0nPVnFHgnpxLvQlOHX8&usqp=CAE" alt="image">
+              </div>
+              <div id="wc-card">
+                <button id="save-btn" onclick="wishlist()"><i class="bi bi-bookmark-heart"></i></button>
+                <h6 id="name">product name</h6>
+                <h6 id="price">$$$</h6>
+                <button id="rating"><i class="bi bi-stars"></i></button>
+                <img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcS_e-rxvnK5757J0WS3qAQreU-1ekM4CGlGkKNbduNp38UrBQTV_qPmDkwgemRBEBgwWiJ57Etwmo5-r__V3PVMWSDgy96jb_ay7vrHUU4&usqp=CAE" alt="image">
+              </div>
+              <div id="wc-card">
+                <button id="save-btn" onclick="wishlist()"><i class="bi bi-bookmark-heart"></i></button>
+                <h6 id="name">product name</h6>
+                <h6 id="price">$$$</h6>
+                <button id="rating"><i class="bi bi-stars"></i></button>
+                <img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcTgogjUIp4n4-vJKYXYS5X5kt9nlSPFD2zdi0282oV2pGb_C2m2pGPiH5Zq8wFBAVNZm9M_Vtsa1zSQPXob4f_XGz63mf9L0BEUbyv59_TH5L2u1mtoM2Qo&usqp=CAE" alt="image">
+              </div>
+              <div id="wc-card">
+                <button id="save-btn" onclick="wishlist()"><i class="bi bi-bookmark-heart"></i></button>
+                <h6 id="name">product name</h6>
+                <h6 id="price">$$$</h6>
+                <button id="rating"><i class="bi bi-stars"></i></button>
+                <img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQ7mSHAbrKkoqddikWx7Y_Z3v-VoosCeT77WwJ7WftcZbNNO8-WH6tRDZaLblBwiqcMgJ-HRFAfziffxZjovVpDYlGFf8Ur-gJ9WcgpEng_7884b_kxANzg8A&usqp=CAE" alt="image">
+              </div>
+              <div id="wc-card">
+                <button id="save-btn" onclick="wishlist()"><i class="bi bi-bookmark-heart"></i></button>
+                <h6 id="name">product name</h6>
+                <h6 id="price">$$$</h6>
+                <button id="rating"><i class="bi bi-stars"></i></button>
+                <img src="https://www.google.com/url?url=https://www.netflorist.co.za/shop/gifts/friendship/personalised-no-days-off-combo/%3Ffcid%3DA3%26cache%3Dclear&rct=j&q=&esrc=s&sa=U&ved=0ahUKEwi5h9fehdv8AhVdTEEAHZB0AskQ1SkIog0oAA&usg=AOvVaw1MckuuPIi3nuTzciJhfx5f" alt="image">
+              </div>
+              <div id="wc-card">
+                <button id="save-btn" onclick="wishlist()"><i class="bi bi-bookmark-heart"></i></button>
+                <h6 id="name">product name</h6>
+                <h6 id="price">$$$</h6>
+                <button id="rating"><i class="bi bi-stars"></i></button>
+                <img src="https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcTFpkde30f8IDAi_I23BuNixai-kvUHfVOV4sjPKQxeXaICzBC26W0iqzFFKkJmK5gbawoevKLcJ3JmxbpYiN0M9YJ1EdNzFpSHkQqolIMx&usqp=CAE" alt="image">
+              </div>
+              <button id="viewmore-btn">viewmore <i class="bi bi-arrow-bar-right"></i></button>
+            </div>
+          </div>
+
+          <div id="cats">
+            <h3>Top search <i class="bi bi-chat-heart"></i></h3>
+            <div id="top-search-cat">
+              
+              <div id="tc-card">
+                <button id="save-btn" onclick="wishlist()"><i class="bi bi-bookmark-heart"></i></button>
+                <h6 id="name">product name</h6>
+                <h6 id="price">$$$</h6>
+                <button id="rating"><i class="bi bi-stars"></i></button>
+                <img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcRCowAkg8p5gh_CFhSBeT5MH8H_VZyI-w7i4pN6OiVZofBU32Uk1PsiIGxS2g2-F3NHv-dhelWE08NL_dNauCUrbfmWVvw7I-pPwLNDJfaH0vTWNH1qt75wuw&usqp=CAE" alt="image">
+              </div>
+              <div id="tc-card">
+                <button id="save-btn" onclick="wishlist()"><i class="bi bi-bookmark-heart"></i></button>
+                <h6 id="name">product name</h6>
+                <h6 id="price">$$$</h6>
+                <button id="rating"><i class="bi bi-stars"></i></button>
+                <img src="https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQ3YQKjz_1uDdp2596hnYwh39Zy5TLu5L4LcFJkqAzW8x0tJaDzSFhigXLN5aGAsN1nfdXGwBYmkWnSk7OQuhjL7Yrlpk5D&usqp=CAY" alt="image">
+              </div>
+              <div id="tc-card">
+                <button id="save-btn" onclick="wishlist()"><i class="bi bi-bookmark-heart"></i></button>
+                <h6 id="name">product name</h6>
+                <h6 id="price">$$$</h6>
+                <button id="rating"><i class="bi bi-stars"></i></button>
+                <img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcRM6ixcyop1B82ywqeSWOztvypNQFotQku3yANpaYUocqz4ZScxBB0keTaHXdHM-JAdDdjdc8sGwX9GjEGqPNG16uVAA7_LhBkceK2CPrKnGsg9Itn9Q7iH&usqp=CAE" alt="image">
+              </div>
+              <div id="tc-card">
+                <button id="save-btn" onclick="wishlist()"><i class="bi bi-bookmark-heart"></i></button>
+                <h6 id="name">product name</h6>
+                <h6 id="price">$$$</h6>
+                <button id="rating"><i class="bi bi-stars"></i></button>
+                <img src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcSZUbMSMQl9lgcFvBOhhGEPLArDpiurmFfp4VZ3my8mv4JnyFGJ5ivkZgvD1kSJKoZmCt6eg-5WARsEblhNuy63246vSX1qeEPd-hWU3IM&usqp=CAE" alt="image">
+              </div>
+              <div id="tc-card">
+                <button id="save-btn" onclick="wishlist()"><i class="bi bi-bookmark-heart"></i></button>
+                <h6 id="name">product name</h6>
+                <h6 id="price">$$$</h6>
+                <button id="rating"><i class="bi bi-stars"></i></button>
+                <img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcREZc-W9UvSDjmuw_gznRgOEkFSPwo7Xql_dQNF-u-Ga0vL4PBUd-pmgaz6V6u_QhUEhlytfYmbmzXvcwaBlovlqgyvuX_vLWZgXdSMlgVG4CiKA-1nN190&usqp=CAE" alt="image">
+              </div>
+              <div id="tc-card">
+                <button id="save-btn" onclick="wishlist()"><i class="bi bi-bookmark-heart"></i></button>
+                <h6 id="name">product name</h6>
+                <h6 id="price">$$$</h6>
+                <button id="rating"><i class="bi bi-stars"></i></button>
+                <img src="https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcT-mkHGziYUq1otKKYva4STv-zipu5o2TTG0Bwmc6MK_0azEKV9pdiq4SLlApOtX_0KUoorQJRI8wHzXjh92YksVCDtnzGh6W1slSQMzZND&usqp=CAE" alt="image">
+              </div>
+              <div id="tc-card">
+                <button id="save-btn" onclick="wishlist()"><i class="bi bi-bookmark-heart"></i></button>
+                <h6 id="name">product name</h6>
+                <h6 id="price">$$$</h6>
+                <button id="rating"><i class="bi bi-stars"></i></button>
+                <img src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcSCNHvqvn1omufpQ9YmKcQQ91ha28Qr2sOm-CJShoT8lHqG6OjODnAcOz8quqxfOvxyn2r-p5S994dyp1qUtz6NhwvvRFkuTUrH8n83HKvTZdS1m1hBeI_M&usqp=CAE" alt="image">
+              </div>
+              <div id="tc-card">
+                <button id="save-btn" onclick="wishlist()"><i class="bi bi-bookmark-heart"></i></button>
+                <h6 id="name">product name</h6>
+                <h6 id="price">$$$</h6>
+                <button id="rating"><i class="bi bi-stars"></i></button>
+                <img src="https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQXgE4vnGQMoe0Gs7W0V8HDv4yLXiZuG_M09FfGx5QrEOuiPou89NU75knZP_WsQmv_O0jFMtCedP_opZlMoz3ByOo8Ae_AQoRfI3DwQWl30rbRR5IyRh2c&usqp=CAE" alt="image">
+              </div>
+              <div id="tc-card">
+                <button id="save-btn" onclick="wishlist()"><i class="bi bi-bookmark-heart"></i></button>
+                <h6 id="name">product name</h6>
+                <h6 id="price">$$$</h6>
+                <button id="rating"><i class="bi bi-stars"></i></button>
+                <img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQTufexcZIr2Cv_9cP4LroAJBwBtrt-u3YCs0P0N8LuspFKVVwrIXGlwM7qHyRRiQg1V8GUqmXikqOljRQmLkWvaLUxVoRM5m5m_exwtPClfq7jXds-XLZ86g&usqp=CAE" alt="image">
+              </div>
+              <div id="tc-card">
+                <button id="save-btn" onclick="wishlist()"><i class="bi bi-bookmark-heart"></i></button>
+                <h6 id="name">product name</h6>
+                <h6 id="price">$$$</h6>
+                <button id="rating"><i class="bi bi-stars"></i></button>
+                <img src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcRxmfNaJHXzkZ1eURVaTTrKDdA9z0asSp8UM2A1Q53nsMzp8twGBxXiv8ON5m_YlDBoKzfGKv8OG8xYHMmtcw7nxl0YGiOVcdScsrEAD9_6bVKQdnbEQHBa&usqp=CAE" alt="image">
+              </div>
+              <div id="tc-card">
+                <button id="save-btn" onclick="wishlist()"><i class="bi bi-bookmark-heart"></i></button>
+                <h6 id="name">product name</h6>
+                <h6 id="price">$$$</h6>
+                <button id="rating"><i class="bi bi-stars"></i></button>
+                <img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQBEY4HhfXGegK-UxCAa0-JlVsJVDzDf1m-Kta_EYAlUJidf473LcnYD4aRjcAB6MRj8XgG8bwQ3ymzc_b7_ek_1STQWOLo5DXBeo_JhYngoB4oCCx8dDF4&usqp=CAE" alt="image">
+              </div>
+              <div id="tc-card">
+                <button id="save-btn" onclick="wishlist()"><i class="bi bi-bookmark-heart"></i></button>
+                <h6 id="name">product name</h6>
+                <h6 id="price">$$$</h6>
+                <button id="rating"><i class="bi bi-stars"></i></button>
+                <img src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcRF5fGQVztmiH9vOMPbCSEv2-wfXotO9IQQetju6L_HBmcCegsDG471HbLxnUCJ5m0kgyqyK3KFVQHGhgU0hvsITEzuIA_wND8D635dLFPY_YpKhLtgM4Nk6g&usqp=CAE" alt="image">
+              </div>
+              <button id="viewmore-btn">viewmore <i class="bi bi-arrow-bar-right"></i></button>
+            </div>
+          </div>
+
+          <div id="cats">
+            <h3>Deals <i class="bi bi-emoji-heart-eyes"></i></h3>
+            <div id="deals-cat">
+              
+              <div id="dc-card">
+                <button id="save-btn" onclick="wishlist()"><i class="bi bi-bookmark-heart"></i></button>
+                <h6 id="name">product name</h6>
+                <h6 id="price">$$$</h6>
+                <button id="rating"><i class="bi bi-stars"></i></button>
+                <img src="https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQeHOHDb_wu-ZHOu7UmCk_D24c5EptN97YRIDJaFr59YdJIlLKGzth8D7IR7ket_fqhXGCWYWNTA0z2_IkqmW4sN3a338Hd9OoUciPpKSs&usqp=CAE" alt="image">
+              </div>
+              <div id="dc-card">
+                <button id="save-btn" onclick="wishlist()"><i class="bi bi-bookmark-heart"></i></button>
+                <h6 id="name">product name</h6>
+                <h6 id="price">$$$</h6>
+                <button id="rating"><i class="bi bi-stars"></i></button>
+                <img src="https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcRqZJQyDWGm_8HU2BpTjMwV24kuhbkhBzJk3VgevYfodE8mdauUKO9LBsTZPF1uE4IMYWhr_bQLEHDMd1j5Y6ZAZj2zoMSsWcmuDxJjuJxWLc56Ftxk5MehQA&usqp=CAE" alt="image">
+              </div>
+              <div id="dc-card">
+                <button id="save-btn" onclick="wishlist()"><i class="bi bi-bookmark-heart"></i></button>
+                <h6 id="name">product name</h6>
+                <h6 id="price">$$$</h6>
+                <button id="rating"><i class="bi bi-stars"></i></button>
+                <img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSVCcySuiWRvAGhCjfMO8NBla6pXrdBbbiKVoH1uuTvPErtJetJ6D16ABz5tiX16CN5Pd4ofp8GsRhmQlutl67Za4Tu3NRFVI9q5lUbA67sX5y4-2sb1lRD&usqp=CAE" alt="image">
+              </div>
+              <div id="dc-card">
+                <button id="save-btn" onclick="wishlist()"><i class="bi bi-bookmark-heart"></i></button>
+                <h6 id="name">product name</h6>
+                <h6 id="price">$$$</h6>
+                <button id="rating"><i class="bi bi-stars"></i></button>
+                <img src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcT6ZjHJFRiJ_SLkL_pJsBmp3Kr9gnQpPpOrn19rCqcaf4zAIqeDKUxmof6HwysNapLz1fYbnoy3OeKFY2L0IVYRw_G7dSDYgzMQV7BAsJ97bmMp3l9VEv-D&usqp=CAE" alt="image">
+              </div>
+              <div id="dc-card">
+                <button id="save-btn" onclick="wishlist()"><i class="bi bi-bookmark-heart"></i></button>
+                <h6 id="name">product name</h6>
+                <h6 id="price">$$$</h6>
+                <button id="rating"><i class="bi bi-stars"></i></button>
+                <img src="https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQL4AYarRzCm5AjeGRdMD1DeNmm3Z99udS9ENe6QjDC0J062zD5hxL_KAyJmh9brIvYiB_7EzG9-1A1za_fst2LeSAbjxYDx5ykndhl838zofnq_3KSPiQveQ&usqp=CAE" alt="image">
+              </div>
+              <div id="dc-card">
+                <button id="save-btn" onclick="wishlist()"><i class="bi bi-bookmark-heart"></i></button>
+                <h6 id="name">product name</h6>
+                <h6 id="price">$$$</h6>
+                <button id="rating"><i class="bi bi-stars"></i></button>
+                <img src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcQW1W3D5TZewKOsscMm7Heb51QcXOquBYJ0iPHjCBPp1ukwFklNZ_nA2YHur2oYyUMNt-KLNfxQWvc28veqYu5bW_CT8V24oINPPNEHFPlcHKrSIYSsEhvc&usqp=CAE" alt="image">
+              </div>
+              <div id="dc-card">
+                <button id="save-btn" onclick="wishlist()"><i class="bi bi-bookmark-heart"></i></button>
+                <h6 id="name">product name</h6>
+                <h6 id="price">$$$</h6>
+                <button id="rating"><i class="bi bi-stars"></i></button>
+                <img src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcTMRASElf71gSsFKwOgDILSM5NOx4EN_jJrBpKXoKnqXKmjuk8ky-FbRY6HGglq0LhgxB0gxkPiATy8OVm4lm__ak7SE247tEf25qtzhqWY3vs2hNdJczzDXA&usqp=CAE" alt="image">
+              </div>
+              <div id="dc-card">
+                <button id="save-btn" onclick="wishlist()"><i class="bi bi-bookmark-heart"></i></button>
+                <h6 id="name">product name</h6>
+                <h6 id="price">$$$</h6>
+                <button id="rating"><i class="bi bi-stars"></i></button>
+                <img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcR9yCi4CHtDCAGEqv8MG7Zr8arZuZ13t8bGPMBhomT44mnmMvThRvBprPIaONnuMfYyM-SotoCB4H9NAh-5ZKkt57CB2ZxkTuz8nkmtidUuMsO17LK9beeT&usqp=CAE" alt="image">
+              </div>
+              <div id="dc-card">
+                <button id="save-btn" onclick="wishlist()"><i class="bi bi-bookmark-heart"></i></button>
+                <h6 id="name">product name</h6>
+                <h6 id="price">$$$</h6>
+                <button id="rating"><i class="bi bi-stars"></i></button>
+                <img src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcQMklasbkydJWLvcbUxEmKTTat7ZMM62HBWE3dKbxuCXsAqrkvIOj2jbkYkM6VOWvtlCevnsWrEp9OK4Yob3XYpjmX8McWph61zP8GI6Fs4IeqAmdvEQIEp4A&usqp=CAE" alt="image">
+              </div>
+              <div id="dc-card">
+                <button id="save-btn" onclick="wishlist()"><i class="bi bi-bookmark-heart"></i></button>
+                <h6 id="name">product name</h6>
+                <h6 id="price">$$$</h6>
+                <button id="rating"><i class="bi bi-stars"></i></button>
+                <img src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcRk_P7bbysjuXo79qu4emBeTGJN6Uy-_D0BuUjHrtyF12Z0Rcrke66zJGUa-c1Yitjzez2g26ZxlGorCaegm7IE3pGKHzVt6gY57tur14E&usqp=CAE" alt="image">
+              </div>
+              <div id="dc-card">
+                <button id="save-btn" onclick="wishlist()"><i class="bi bi-bookmark-heart"></i></button>
+                <h6 id="name">product name</h6>
+                <h6 id="price">$$$</h6>
+                <button id="rating"><i class="bi bi-stars"></i></button>
+                <img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcRgZNc2nS7xwIcQRAWdX8gb5oq7EcTKr1CJfhVcah5pINL3JH-COTdumZCbmOVCxJbElvAyCa7sZC-3eP4ultopeI9iMUo0ZR86A2kB3ihoL0fSYUm9R1K2&usqp=CAE" alt="image">
+              </div>
+              <div id="dc-card">
+                <button id="save-btn" onclick="wishlist()"><i class="bi bi-bookmark-heart"></i></button>
+                <h6 id="name">product name</h6>
+                <h6 id="price">$$$</h6>
+                <button id="rating"><i class="bi bi-stars"></i></button>
+                <img src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTN9vaG8FThXlPdCuUj8T8ZdARcXkrzq6RvKJCxAV1Zu_HscGDiVOcS9AhJ1_Dmxnb15WFN22IHaGurqzHQ41J3xokRlKIQKMEjoodJFz8OhbA0B0hqpi3M&usqp=CAE" alt="image">
+              </div>
+              <button id="viewmore-btn">viewmore <i class="bi bi-arrow-bar-right"></i></button>
+            </div>
+          </div>
+
+          <div id="cats">
+            <h3>Recommandations <i class="bi bi-browser-safari"></i></h3>
+            <div id="recommandations-cat">
+              
+              <div id="rc-card">
+                <button id="save-btn" onclick="wishlist()"><i class="bi bi-bookmark-heart"></i></button>
+                <h6 id="name">product name</h6>
+                <h6 id="price">$$$</h6>
+                <button id="rating"><i class="bi bi-stars"></i></button>
+                <img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcTTq9AmFZsW3rN11koqgjqw514KVQ-PfjhV8gWjtDcuKaFSFJ1JKLSpb2lIzmDHT2vHmO7oJ3KEiLRv9XBq_aPGpFzvNNaOR4W96eEYgFTBbJZG5KCkMU8DAw&usqp=CAE" alt="image">
+              </div>
+              <div id="rc-card">
+                <button id="save-btn" onclick="wishlist()"><i class="bi bi-bookmark-heart"></i></button>
+                <h6 id="name">product name</h6>
+                <h6 id="price">$$$</h6>
+                <button id="rating"><i class="bi bi-stars"></i></button>
+                <img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQwLm3GvRczGMuvu8z8E7IAyPWxdEowarSRMmRiePrZCDJLsyrep1ydn1bDQttcF3S7sAKa0RX1jMVB82WE4qdkTxRTk0m2spY4tQ5KiovCudFHZC-8oViUtw&usqp=CAE" alt="image">
+              </div>
+              <div id="rc-card">
+                <button id="save-btn" onclick="wishlist()"><i class="bi bi-bookmark-heart"></i></button>
+                <h6 id="name">product name</h6>
+                <h6 id="price">$$$</h6>
+                <button id="rating"><i class="bi bi-stars"></i></button>
+                <img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcT0d94AlzdJsypQblcQ5OdGOk7MPFSX9f9RePxn5eDP0yfCm1bzNjWGhjFEnWTUv32oeQu7buuZFnTnKbg6fVQDVOwVYekCgWwLNrSpr2p_HRSY5xZ6CWM5&usqp=CAE" alt="image">
+              </div>
+              <div id="rc-card">
+                <button id="save-btn" onclick="wishlist()"><i class="bi bi-bookmark-heart"></i></button>
+                <h6 id="name">product name</h6>
+                <h6 id="price">$$$</h6>
+                <button id="rating"><i class="bi bi-stars"></i></button>
+                <img src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcSljPHwnNbp9LvdNnCx4VScSvSxqBApdFMKl7BobfOXHlw6xoI5DVJUf5EYez5mXsSE4N4AGMUAhiObSEP7XkpYQQPecm1egCZA45QpRD38&usqp=CAE" alt="image">
+              </div>
+              <div id="rc-card">
+                <button id="save-btn" onclick="wishlist()"><i class="bi bi-bookmark-heart"></i></button>
+                <h6 id="name">product name</h6>
+                <h6 id="price">$$$</h6>
+                <button id="rating"><i class="bi bi-stars"></i></button>
+                <img src="https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcR2LZ5dMgzlSvdfJXXwBmN19s4TPq9JYbCMobisQxaCzCPmC5WfAUh-yhJU6Sehd27n_u3y4Rmr1y3gzVQEtN92vaZiWU4ntKR6jfnv01N1zHq0XJ8gel8XaQ&usqp=CAE" alt="image">
+              </div>
+              <div id="rc-card">
+                <button id="save-btn" onclick="wishlist()"><i class="bi bi-bookmark-heart"></i></button>
+                <h6 id="name">product name</h6>
+                <h6 id="price">$$$</h6>
+                <button id="rating"><i class="bi bi-stars"></i></button>
+                <img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcTQL0WWg3oOWBM9N8jb-d-0Gjch-QyWuuokTZ0af8vb1vwoR2JBRA0iY2-wnn7TRv-N91wLeizlx_BiukT3Dl5S8l-lIROskdkzvUqVgHs&usqp=CAE" alt="image">
+              </div>
+              <div id="rc-card">
+                <button id="save-btn" onclick="wishlist()"><i class="bi bi-bookmark-heart"></i></button>
+                <h6 id="name">product name</h6>
+                <h6 id="price">$$$</h6>
+                <button id="rating"><i class="bi bi-stars"></i></button>
+                <img src="https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcRY-AtwfFYrX_pfge2FcMSiafsXcQEP8qpNSp_3s2Y103LeJjc16bf8fe0xkgQvqa9tVWK1qp_ddeiJVqxwpqXaSnDHVx75&usqp=CAE" alt="image">
+              </div>
+              <div id="rc-card">
+                <button id="save-btn" onclick="wishlist()"><i class="bi bi-bookmark-heart"></i></button>
+                <h6 id="name">product name</h6>
+                <h6 id="price">$$$</h6>
+                <button id="rating"><i class="bi bi-stars"></i></button>
+                <img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcS9e4ZRv5FxH5pxq3q3DmlbwpBPSLSfjXcOeCX4pjdOROYStGvgglAVJKUzQFUxY6U52f2mwnU4twW47dBj_kC5FiPqdg3QkIOypgEXYqk&usqp=CAE" alt="image">
+              </div>
+              <div id="rc-card">
+                <button id="save-btn" onclick="wishlist()"><i class="bi bi-bookmark-heart"></i></button>
+                <h6 id="name">product name</h6>
+                <h6 id="price">$$$</h6>
+                <button id="rating"><i class="bi bi-stars"></i></button>
+                <img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcRKNeVtfn8qSfxB05wK6Uh9RmZtabx82fMYiL00c1LVDS4r4m3Q0e0F2f9ze4WT7PU_FuULF1TccfCZTqw6qS7nj2lTR0_aqUqdBuRaxnS_iS7eZCLUoAEKkds&usqp=CAE" alt="image">
+              </div>
+              <div id="rc-card">
+                <button id="save-btn" onclick="wishlist()"><i class="bi bi-bookmark-heart"></i></button>
+                <h6 id="name">product name</h6>
+                <h6 id="price">$$$</h6>
+                <button id="rating"><i class="bi bi-stars"></i></button>
+                <img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSvV09meAlViruSOeX6kl0g9qQv8tMp540E59_nLwx6R2EsjK7R4zptoD4aBg9tFgt5PvOsBl3AnPj91sUlcIc0NY5kTVU6iXdv7ZhyUz57&usqp=CAE" alt="image">
+              </div>
+              <div id="rc-card">
+                <button id="save-btn" onclick="wishlist()"><i class="bi bi-bookmark-heart"></i></button>
+                <h6 id="name">product name</h6>
+                <h6 id="price">$$$</h6>
+                <button id="rating"><i class="bi bi-stars"></i></button>
+                <img src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcTkKwpbfFTjYH8Zcp7JxsheoC071_gwqqfvhE4qeaS0ou1lHZsHfpewgBEHK2NxbelFoVHPxZ058a2Nh1nIUVhfkH769PYQ8SKUGb-8ZRNtl3b6NhGeeHCRlQ&usqp=CAE" alt="image">
+              </div>
+              <div id="rc-card">
+                <button id="save-btn" onclick="wishlist()"><i class="bi bi-bookmark-heart"></i></button>
+                <h6 id="name">product name</h6>
+                <h6 id="price">$$$</h6>
+                <button id="rating"><i class="bi bi-stars"></i></button>
+                <img src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSffnlzYTeVRH49mAZ0bDM0wtIzSMZfHBQewfhZUdlszja3u0EzHShPwXysIefXj-Q4VqhR1j3aAIRYZJ_-nJLFmr7fIaFWw9FXslJ2viCB2COWH0rg6zf_Zg&usqp=CAE" alt="image">
+              </div>
+              <button id="viewmore-btn">viewmore <i class="bi bi-arrow-bar-right"></i></button>
+            </div>
+          </div>
+
+          <div id="cats">
+            <h3>Essentials <i class="bi bi-cup-hot-fill"></i></h3>
+            <div id="essentials-cat">
+              
+              <div id="ec-card">
+                <button id="save-btn" onclick="wishlist()"><i class="bi bi-bookmark-heart"></i></button>
+                <h6 id="name">product name</h6>
+                <h6 id="price">$$$</h6>
+                <button id="rating"><i class="bi bi-stars"></i></button>
+                <img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcRWrr-QoHdAR2d_DKD4WBtisaASp236NGfb8cD1kjlPHOcAiGfTbAR3sfAawYo_ft1-xyQrpF6WgOjAP-KOlPmEuYU7XGyKsSWNE2rUL82D&usqp=CAE" alt="image">
+              </div>
+              <div id="ec-card">
+                <button id="save-btn" onclick="wishlist()"><i class="bi bi-bookmark-heart"></i></button>
+                <h6 id="name">product name</h6>
+                <h6 id="price">$$$</h6>
+                <button id="rating"><i class="bi bi-stars"></i></button>
+                <img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcRKy1nVvcYSeH_uf5QBoTKhOjk-mtFIqTZDDppuVPwe18_mCPhESLjSfwv_bPas54oMuwbWYdmjSwqGe-cWFT9XZdEqyAgzJbYCMarL7CfxHHexKLa67fVKyw&usqp=CAE" alt="image">
+              </div>
+              <div id="ec-card">
+                <button id="save-btn" onclick="wishlist()"><i class="bi bi-bookmark-heart"></i></button>
+                <h6 id="name">product name</h6>
+                <h6 id="price">$$$</h6>
+                <button id="rating"><i class="bi bi-stars"></i></button>
+                <img src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcRwPNFhM4Syl9j9jaDHk2Jge2LiWUmB7i9Erln8VL7vIlxfMbq9Pf1F315ED7XZvPPSihFqVfBuwNOpezHiATYCbPcOZTHv4Z-l6dP5ejtQKs1PjcGGwCAPn6hY&usqp=CAE" alt="image">
+              </div>
+              <div id="ec-card">
+                <button id="save-btn" onclick="wishlist()"><i class="bi bi-bookmark-heart"></i></button>
+                <h6 id="name">product name</h6>
+                <h6 id="price">$$$</h6>
+                <button id="rating"><i class="bi bi-stars"></i></button>
+                <img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSMAfG1gpzIMPsILYQhztMq1lf5yq8swzl4ZsEFYDqA17XZXaFpOSsS48lf5jOSQKEYj2baPrMvE8AWRFYMZxzT3Id4KEqZi3DKmln3tNZ8l52Idz88-WmLnQ&usqp=CAE" alt="image">
+              </div>
+              <div id="ec-card">
+                <button id="save-btn" onclick="wishlist()"><i class="bi bi-bookmark-heart"></i></button>
+                <h6 id="name">product name</h6>
+                <h6 id="price">$$$</h6>
+                <button id="rating"><i class="bi bi-stars"></i></button>
+                <img src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTcoY8vLUs9qJjG5ZgAcSRRNWriFAe_DiB-TFOodR1EbYbLMEB_8b52B7VpzD9r5tiA6ToYcat5k-CsOd19dg_Jg3EzHJilNWagNqaKaqyjSkg4fHWOU9skNw&usqp=CAE" alt="image">
+              </div>
+              <div id="ec-card">
+                <button id="save-btn" onclick="wishlist()"><i class="bi bi-bookmark-heart"></i></button>
+                <h6 id="name">product name</h6>
+                <h6 id="price">$$$</h6>
+                <button id="rating"><i class="bi bi-stars"></i></button>
+                <img src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcSZlaWZkVV25pJNSdYmFUtuJzqoguBjT05sQuuD9fgqwHb5pBSEAKlBJ3LC-y_Sfxg6RczqUS46B-jdVJv-NhtlILNibEkzTW-jAFgffwXInL8oSMaCDAkfJA&usqp=CAE" alt="image">
+              </div>
+              <div id="ec-card">
+                <button id="save-btn" onclick="wishlist()"><i class="bi bi-bookmark-heart"></i></button>
+                <h6 id="name">product name</h6>
+                <h6 id="price">$$$</h6>
+                <button id="rating"><i class="bi bi-stars"></i></button>
+                <img src="https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQJ4LWsx-PczPRNS80F8R4n4f8ADX6o9MrK9wGc2JKiWuWRYKwF6fiUGRvvR1yZKWfrMlFa0v0Yk6zfTDwpexB2KK8G516PfVG602NiRLXo1bBfFFcuaR3m7g&usqp=CAE" alt="image">
+              </div>
+              <div id="ec-card">
+                <button id="save-btn" onclick="wishlist()"><i class="bi bi-bookmark-heart"></i></button>
+                <h6 id="name">product name</h6>
+                <h6 id="price">$$$</h6>
+                <button id="rating"><i class="bi bi-stars"></i></button>
+                <img src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcRlHLh0GiXnGjCMWGzXVZUE2mAfggO0P6WVO6LeUzbORy_ssMnm81VKrozN6zPsHXi6ZOIQz1m5tfmnd7GhCJwWhtTw_ZNG_HuPEseeZlxiNxHwRgep6BQy3Q&usqp=CAE" alt="image">
+              </div>
+              <div id="ec-card">
+                <button id="save-btn" onclick="wishlist()"><i class="bi bi-bookmark-heart"></i></button>
+                <h6 id="name">product name</h6>
+                <h6 id="price">$$$</h6>
+                <button id="rating"><i class="bi bi-stars"></i></button>
+                <img src="https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcTNBh16r0gdRvuD2mUXq04RsMNCbFGa23IGz7bWa_QG3dCmk2Q-IwNfZr9rozs8EI6Jtucl4gDaVCqMnWCbtysliY3D6Q4GpBhfPEeNHsdc&usqp=CAE" alt="image">
+              </div>
+              <div id="ec-card">
+                <button id="save-btn" onclick="wishlist()"><i class="bi bi-bookmark-heart"></i></button>
+                <h6 id="name">product name</h6>
+                <h6 id="price">$$$</h6>
+                <button id="rating"><i class="bi bi-stars"></i></button>
+                <img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQr19nSUAbbZH9VtT26gQD6qN-rV7IuU1SwOBuvrIzXBFeUfKHXem-d4BQ6TLyeZIyJDcPy9Gjlnx_MjWWzundrvQlEapkz4EV3U-kvi8q656zbGfI5HHAz&usqp=CAE" alt="image">
+              </div>
+              <div id="ec-card">
+                <button id="save-btn" onclick="wishlist()"><i class="bi bi-bookmark-heart"></i></button>
+                <h6 id="name">product name</h6>
+                <h6 id="price">$$$</h6>
+                <button id="rating"><i class="bi bi-stars"></i></button>
+                <img src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcQgvJXq0qQSp8ezGjeKx-zSdWMe2th4UJS7N4-Yf46INz6lfqCPuxeUPG6FAnp70CU_2ar-rHQKrEf6xi6LmYPDXccDM311I0KWbVgri5A&usqp=CAE" alt="image">
+              </div>
+              <div id="ec-card">
+                <button id="save-btn" onclick="wishlist()"><i class="bi bi-bookmark-heart"></i></button>
+                <h6 id="name">product name</h6>
+                <h6 id="price">$$$</h6>
+                <button id="rating"><i class="bi bi-stars"></i></button>
+                <img src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcTFKu9s5np-bjeV4yxw_pYOei0lRe__8Lp32lNA_zbEBak-xuPdvVYLQhmzHFLJg1G6MuQRSntcgy2xYNsTGrUWJ6uWZx-vAD8QDEUKbVn5&usqp=CAE" alt="image">
+              </div>
+              <button id="viewmore-btn">viewmore <i class="bi bi-arrow-bar-right"></i></button>
+              
+            </div>
+          </div>
+
+          <div id="cats">
+            <h3>Random pick <i class="bi bi-fire"></i></h3>
+            <div id="random-pick-cat">
+              
+              <div id="rc-card">
+                <button id="save-btn" onclick="wishlist()"><i class="bi bi-bookmark-heart"></i></button>
+                <h6 id="name">product name</h6>
+                <h6 id="price">$$$</h6>
+                <button id="rating"><i class="bi bi-stars"></i></button>
+                <img src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcRioD9NIO3zMqXAP7_RW54qyxZOOZaOvJljS2lh25Tw3WgxXLMnY4E1g_7hbk3TLHl40zAoS43BswTptwR8_zfObgA9kbkG3u4XsQCPD3n_JzYGhvo4wiiy0g&usqp=CAE" alt="image">
+              </div>
+              <div id="rc-card">
+                <button id="save-btn" onclick="wishlist()"><i class="bi bi-bookmark-heart"></i></button>
+                <h6 id="name">product name</h6>
+                <h6 id="price">$$$</h6>
+                <button id="rating"><i class="bi bi-stars"></i></button>
+                <img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQFiNqSAmIZDMvLWZGEWc3iu-pQ0NALWAvvSvshjVrLkjC1PqIOxBJLDF_G-b3YZ8kWBO0dW6gGsJfOeZC3WB9dn1gwiqElJ1I_RWNyErtBYUoVWl2qF7njPw&usqp=CAE" alt="image">
+              </div>
+              <div id="rc-card">
+                <button id="save-btn" onclick="wishlist()"><i class="bi bi-bookmark-heart"></i></button>
+                <h6 id="name">product name</h6>
+                <h6 id="price">$$$</h6>
+                <button id="rating"><i class="bi bi-stars"></i></button>
+                <img src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcQOnExZYj7Ke0_SqCn_hLWFaKiiMlEP9CFSp00-Im-6xLA4MCO9MM42lAfURE1f29pPRvDUmEPucALWVnPHzu017yJ_ToURBlcq5fN_L-B7DyswY5rUrNWJpg&usqp=CAE" alt="image">
+              </div>
+              <div id="rc-card">
+                <button id="save-btn" onclick="wishlist()"><i class="bi bi-bookmark-heart"></i></button>
+                <h6 id="name">product name</h6>
+                <h6 id="price">$$$</h6>
+                <button id="rating"><i class="bi bi-stars"></i></button>
+                <img src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcS5rClM938yqJJoP0C5lu5oNx9s-b_6vsP72KnVZNxuHjIWnrUroSPOu2TMIT0FSxqdqlZHADYOhzSxynnct1d8PoqRCgSXfIpjz8dfbYTbvBF49DaDIYMs&usqp=CAE" alt="image">
+              </div>
+              <div id="rc-card">
+                <button id="save-btn" onclick="wishlist()"><i class="bi bi-bookmark-heart"></i></button>
+                <h6 id="name">product name</h6>
+                <h6 id="price">$$$</h6>
+                <button id="rating"><i class="bi bi-stars"></i></button>
+                <img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSkLJesrlCCjP7F3GGzZEz_EE1fNAx-Wh8KD05UAVXivZ6oDN4LqfNXd-icuuux5UA-D7IN4-md3pgINYM9Db7BKtBkxOYOdB-kWsBTI4Z55jLMNgZ82pzM&usqp=CAE" alt="image">
+              </div>
+              <div id="rc-card">
+                <button id="save-btn" onclick="wishlist()"><i class="bi bi-bookmark-heart"></i></button>
+                <h6 id="name">product name</h6>
+                <h6 id="price">$$$</h6>
+                <button id="rating"><i class="bi bi-stars"></i></button>
+                <img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQOY8SMSE7GHNsHr6TRYVkPc-yhw9l1hmYoBCS3jhIMgDs3zqtWfIKC6tjPKtFMplP32b_DHBg8NXkuAfGfPfPL4jdys5UAe6Fro-Z3I7g&usqp=CAE" alt="image">
+              </div>
+              <div id="rc-card">
+                <button id="save-btn" onclick="wishlist()"><i class="bi bi-bookmark-heart"></i></button>
+                <h6 id="name">product name</h6>
+                <h6 id="price">$$$</h6>
+                <button id="rating"><i class="bi bi-stars"></i></button>
+                <img src="https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQI0fZvR9nP0cQtSHdeRxoY0Af_nn6FlbqTQkphNyUf5o00Ws3kWKh4JwNf0W4um9-mU8Dxurv-EwUDyRVpz2IIRrhxght7Mc_4AaAiGP8&usqp=CAE" alt="image">
+              </div>
+              <div id="rc-card">
+                <button id="save-btn" onclick="wishlist()"><i class="bi bi-bookmark-heart"></i></button>
+                <h6 id="name">product name</h6>
+                <h6 id="price">$$$</h6>
+                <button id="rating"><i class="bi bi-stars"></i></button>
+                <img src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcQpSDQriXSZfHv-b-VqKkfmNPuEWimbG_0-H-k0Vun45n0esZ0R1_fj6Pbp-kYOkTZ291rVL7_uCIpCNmFX7WjSekOeChelS7rAZlyJDiq3recIVxVq4Jkw5Q&usqp=CAE" alt="image">
+              </div>
+              <div id="rc-card">
+                <button id="save-btn" onclick="wishlist()"><i class="bi bi-bookmark-heart"></i></button>
+                <h6 id="name">product name</h6>
+                <h6 id="price">$$$</h6>
+                <button id="rating"><i class="bi bi-stars"></i></button>
+                <img src="https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcRiipPkFBnGvMQn6TNijDxK-fLV7qqapF2psd3PUFE4IcAvEwoMo_ocRV7xv9R26qsm6ZDESzvnNvvwuo8VyX7qiYhvHrz8qQD87elmXdAwmgpuGawteE8x&usqp=CAE" alt="image">
+              </div>
+              <div id="rc-card">
+                <button id="save-btn" onclick="wishlist()"><i class="bi bi-bookmark-heart"></i></button>
+                <h6 id="name">product name</h6>
+                <h6 id="price">$$$</h6>
+                <button id="rating"><i class="bi bi-stars"></i></button>
+                <img src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcTvwtri4dXn8G6TjhmoeLYNRFqbHQm24beLOMmmWKG--8YS6ocD2fQG_kqgYOAABxtphq6yggU7Tku9R35Y1P367C2PYtC6wfSAW1a8hlxOii_bfmcFBTfamQ&usqp=CAE" alt="image">
+              </div>
+              <div id="rc-card">
+                <button id="save-btn" onclick="wishlist()"><i class="bi bi-bookmark-heart"></i></button>
+                <h6 id="name">product name</h6>
+                <h6 id="price">$$$</h6>
+                <button id="rating"><i class="bi bi-stars"></i></button>
+                <img src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcTg0zB3oly2kEyaVkCxhlTk45zzeEaKv3f_QRc84JW119Dzp_fqzDzg8Y-gzCv8iT4zchPXxdfyd72N7AuU_I_OhS_hTFvMYqM_kq5hcLbLCOdYSd4vZ6wc3Q&usqp=CAE" alt="image">
+              </div>
+              <div id="rc-card">
+                <button id="save-btn" onclick="wishlist()"><i class="bi bi-bookmark-heart"></i></button>
+                <h6 id="name">product name</h6>
+                <h6 id="price">$$$</h6>
+                <button id="rating"><i class="bi bi-stars"></i></button>
+                <img src="https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcThrl_zjvH4TORtF46qIXUGTV9FDqr29W17EWQdH2veShjpcv6g4Lrw9bXyrMT1saInfMM7OKxjIyJdWdwIEt67m8EcxH-ex0zwzHBra68-fB1wGzNKj4kjng&usqp=CAE" alt="image">
+              </div>
+
+              <button id="viewmore-btn">viewmore <i class="bi bi-arrow-bar-right"></i></button>
+              
+            </div>
+          </div>
+
+        </div>
+
+        <p>i believe that great websites are the result of a collaborartive effort between the client and the developer. This piece remains the interlectual property of MAE enterprises until further notice. &copy;2022 MAE.inc</p>
+
+        
+
+    </div>
+    
+    
+    <script src="tac.js" type="text/javascript"></script>
+    <script src="tac-database.js" type="text/javascript"></script>
+</body>
+</html>
